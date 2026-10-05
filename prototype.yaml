@@ -1,0 +1,9 @@
+# prototype.yaml: per-prototype facts (Appendix B, rules 33–36)
+# Editable by anyone with write access (E14).
+# The platform reads ONLY `protection` (E15). slug/tier/expires are written by provisioning (E18),
+# for information only; the platform's own record and the poc-* labels are authoritative.
+schemaVersion: 1
+protection: passcode        # login | passcode → pipeline passes it on as PROTECTION_MODE
+slug: ~                     # written on the first pipeline run
+tier: ~                     # standard | restricted
+expires: ~                  # YYYY-MM-DD

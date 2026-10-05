@@ -1,0 +1,10 @@
+# Mirrors config/gates/locked-paths.txt (SKL-2, rule 1); keep both in sync.
+# CODEOWNERS alone does not stop an auto-merge: the CI path check reading locked-paths.txt is the lock.
+# TODO(b): replace the placeholder team with the real template-owner team.
+/CLAUDE.md                   @3AP-AG/<template-owners>
+/.template-version           @3AP-AG/<template-owners>
+/Makefile                    @3AP-AG/<template-owners>
+/.github/                    @3AP-AG/<template-owners>
+/config/gates/               @3AP-AG/<template-owners>
+/e2e/exemplars/              @3AP-AG/<template-owners>
+/e2e/playwright.config.ts    @3AP-AG/<template-owners>

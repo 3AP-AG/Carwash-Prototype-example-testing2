@@ -1,0 +1,20 @@
+# Client passcode job (E17, INF-2). Triggered from the builder's session via the method skill.
+name: passcode
+
+on:
+  workflow_dispatch:
+    inputs:
+      label:
+        description: Neutral label, never a client name (rule 4)
+        required: true
+      valid-days:
+        description: Days until expiry; capped at poc-expires
+        required: true
+
+jobs:
+  create-token:
+    # TODO(INF-2): uses: 3AP-AG/<platform-repo>/.github/workflows/passcode.yml@v1
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - run: 'echo "TODO(INF-2): passcode via the platform reusable workflow" && exit 1'

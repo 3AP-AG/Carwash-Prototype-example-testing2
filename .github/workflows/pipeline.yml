@@ -1,0 +1,43 @@
+# Thin caller. Gates run here; deploy logic lives in the platform repo.
+# Locked (config/gates/locked-paths.txt, SKL-2).
+#
+# Time budget (T7): the whole run, gates through acceptance, takes at most 10 minutes.
+# Jobs run in sequence, so their timeouts must add up to <= 10: gates 4 + deploy/acceptance 6.
+# Starting split; tuned on the first prototype (T14).
+name: pipeline
+
+# Manual-only while the template is a skeleton: every step is still a stub that exits 1.
+# TODO(b): restore the real triggers once `make check` works:
+#   on:
+#     pull_request:
+#     push:
+#       branches: [main]
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: pipeline-${{ github.ref }}
+  cancel-in-progress: true   # a newer run on the same branch cancels the older one (INF-3)
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4        # T7 budget, tuned per T14
+    steps:
+      - uses: actions/checkout@v4
+      # TODO(b): set up Java 25, Node LTS, pnpm (with caches: the budget is tight)
+      # TODO(b): path check against config/gates/locked-paths.txt (rule 1) and
+      #          e2e/backlog/<ID>.spec.ts of the item in flight only (rule 2)
+      # TODO(b): make check   (lint → typecheck → test → staleness diff; writes the failure summary)
+      - run: 'echo "TODO(b): gates" && exit 1'
+
+  deploy:
+    if: github.event_name == 'push'
+    needs: gates
+    # TODO(INF-2): uses: 3AP-AG/<platform-repo>/.github/workflows/deploy.yml@v1
+    #   with: protection-mode from prototype.yaml, image
+    #   covers migrations, candidate deploy, Playwright acceptance, traffic shift
+    runs-on: ubuntu-latest
+    timeout-minutes: 6        # T7 budget, tuned per T14
+    steps:
+      - run: 'echo "TODO(INF-2): deploy via the platform reusable workflow" && exit 1'

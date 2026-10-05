@@ -1,0 +1,9 @@
+# The one list of locked paths (SKL-2, rule 1). Read by the CI path check; .github/CODEOWNERS mirrors it.
+# A PR touching any of these fails the build unless made by the template owners.
+CLAUDE.md
+.template-version
+Makefile
+.github/**
+config/gates/**
+e2e/exemplars/**
+e2e/playwright.config.ts
